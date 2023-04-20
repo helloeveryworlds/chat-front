@@ -12,7 +12,6 @@ const TextFields = () => {
   ]);
   const [isLoading, setIsLoading] = useState(true);
   const [useAudio, setUseAudio] = useState(false);
-  const [transcript, setTranscript] = useState('');
 
   // I want to add a button to switch between text and audio and after I click button again, it will stop
   // record and save the audio on local and send the audio to the server
