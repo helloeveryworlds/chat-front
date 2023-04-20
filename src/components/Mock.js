@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import styles from '../style/Mock.module.css';
 import ReactQuill from 'react-quill';
 import { Spin } from "antd";
-import { useWhisper } from '@chengsokdara/use-whisper'
-
+import Audio from './Audio';
 import 'react-quill/dist/quill.snow.css'; // Import the styles
 //https://www.youtube.com/watch?v=LX_DXLlaymg
 const TextFields = () => {
@@ -82,9 +81,7 @@ const TextFields = () => {
         <button onClick={handleSubmit} className={styles.submitButton}>
           Submit
         </button>
-        <button onClick={handleAudio} className={styles.audioButton}>
-          Audio
-        </button>
+        <Audio/>
       </div>
     </div>
   );

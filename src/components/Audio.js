@@ -1,18 +1,55 @@
-import { useWhisper } from '@chengsokdara/use-whisper'
+import { useState } from "react";
 
-const App = () => {
-  const { transcript } = useWhisper({
-    apiKey: process.env.OPENAI_API_TOKEN, // YOUR_OPEN_AI_TOKEN
-    streaming: true,
-    timeSlice: 1_000, // 1 second
-    whisperConfig: {
-      language: 'en',
-    },
-  })
+function RecordAudio() {
+  const [recording, setRecording] = useState(false);
+  const [mediaRecorder, setMediaRecorder] = useState(null);
+
+  const startRecording = () => {
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then((stream) => {
+        const mediaRecorder = new MediaRecorder(stream);
+        setMediaRecorder(mediaRecorder);
+
+        mediaRecorder.start();
+
+        const audioChunks = [];
+        mediaRecorder.addEventListener("dataavailable", (event) => {
+          audioChunks.push(event.data);
+        });
+
+        mediaRecorder.addEventListener("stop", () => {
+          const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+          const audioUrl = URL.createObjectURL(audioBlob);
+          const link = document.createElement("a");
+          link.href = audioUrl;
+          link.download = "recording.wav";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+
+        setRecording(true);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorder) {
+      mediaRecorder.stop();
+      setRecording(false);
+    }
+  };
 
   return (
     <div>
-      <p>{transcript.text}</p>
+      {!recording ? (
+        <button onClick={startRecording}>Start Recording</button>
+      ) : (
+        <button onClick={stopRecording}>Stop Recording</button>
+      )}
     </div>
-  )
+  );
 }
+export default RecordAudio;
+
