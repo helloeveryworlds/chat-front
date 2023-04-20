@@ -22,7 +22,7 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function transcribeAudio(filename) {
-  await delay(3500); // 1000 milliseconds = 1 second
+  await delay(3500); // 1000 milliseconds = 1 seconds
 
   const transcript = await openai.createTranscription(
     fs.createReadStream(filename),

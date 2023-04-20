@@ -64,11 +64,15 @@ function RecordAudio(props) {
     }
   };
   return (
-    <div>
+    <div className="audioContainer">
       {!recording ? (
-        <button onClick={startRecording}>Start Recording</button>
+        <button className="startButton" onClick={startRecording}>
+          Start Recording
+        </button>
       ) : (
-        <button onClick={stopRecording}>Stop Recording</button>
+        <button className="stopButton" onClick={stopRecording}>
+          Stop Recording
+        </button>
       )}
     </div>
   );
