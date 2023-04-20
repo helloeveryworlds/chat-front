@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from '../style/Mock.module.css';
 import ReactQuill from 'react-quill';
 import { Spin } from "antd";
+import { useWhisper } from '@chengsokdara/use-whisper'
 
 import 'react-quill/dist/quill.snow.css'; // Import the styles
 //https://www.youtube.com/watch?v=LX_DXLlaymg
@@ -12,9 +13,16 @@ const TextFields = () => {
   ]);
   const [isLoading, setIsLoading] = useState(true);
   const [useAudio, setUseAudio] = useState(false);
+
+
+
+
+
+
   // I want to add a button to switch between text and audio and after I click button again, it will stop
   // record and save the audio on local and send the audio to the server
   const handleAudio = () => {
+    
     setUseAudio(!useAudio);
   }
   const handleInputChange = (newInputContent) => {
