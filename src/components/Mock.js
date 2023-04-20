@@ -12,18 +12,10 @@ const TextFields = () => {
   ]);
   const [isLoading, setIsLoading] = useState(true);
   const [useAudio, setUseAudio] = useState(false);
-
-
-
-
-
+  const [transcript, setTranscript] = useState('');
 
   // I want to add a button to switch between text and audio and after I click button again, it will stop
   // record and save the audio on local and send the audio to the server
-  const handleAudio = () => {
-    
-    setUseAudio(!useAudio);
-  }
   const handleInputChange = (newInputContent) => {
 
     const newMessage = {
@@ -33,7 +25,10 @@ const TextFields = () => {
 
     setInputValue((prevInputValue) => [...prevInputValue, newMessage]);
   };
-
+  const handleTranscript = (transcription) => {
+    console.log(transcription);
+    handleInputChange(transcription);
+  };
   const handleSubmit = async () => {
     //console.log("Yeah");
     setIsLoading(false);
@@ -81,8 +76,8 @@ const TextFields = () => {
         <button onClick={handleSubmit} className={styles.submitButton}>
           Submit
         </button>
-        <Audio/>
-      </div>
+        <Audio onTranscriptChange={handleTranscript} />      
+        </div>
     </div>
   );
 };

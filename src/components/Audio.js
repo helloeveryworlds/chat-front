@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-function RecordAudio() {
+function RecordAudio(props) {
   const [recording, setRecording] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState(null);
-
+  const[transcript, setTranscript] = useState("");
   const startRecording = () => {
     navigator.mediaDevices
       .getUserMedia({ audio: true })
@@ -32,15 +32,37 @@ function RecordAudio() {
         setRecording(true);
       })
       .catch((err) => console.error(err));
+      
   };
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  const stopRecording = () => {
+  async function getTranscription(data) {
+    
+     const response = await fetch("http://localhost:8000/whisper", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.ok) {
+      const transcription = await response.text();
+      return transcription;
+    } else {
+      throw new Error("An error occurred while getting the transcription");
+    }
+  }
+  const stopRecording = async () => {
     if (mediaRecorder) {
       mediaRecorder.stop();
       setRecording(false);
+      console.log(1);
+      const transcription = await getTranscription({ audio: mediaRecorder });
+      setTranscript(transcription);
+      console.log(transcription);
+      props.onTranscriptChange(transcription);
     }
   };
-
   return (
     <div>
       {!recording ? (
