@@ -1,0 +1,39 @@
+.App-logo {
+    height: 28px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+
+.App-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #80f0b8;
+  min-height: 5px;
+  box-sizing: border-box;
+}
+
+#main-title {
+  font-size: 1.5rem; /* Adjust the font size */
+  color: #333;
+  margin-left: 10px;
+}
+
+#logo-image {
+  width: 80px; /* Adjust the width */
+  height: auto;
+}
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0px;
+}
+
+.title-bold {
+  font-weight: 900;
+}
+
+#headerTitle {
+  color: #ff9900;
+}

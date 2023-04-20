@@ -1,0 +1,52 @@
+/* ChatBox.module.css */
+.chatBox {
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.chatBox > * + * {
+  margin-top: 10px;
+}
+
+.chatBox h1 {
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.chatBox form + form {
+  margin-top: 20px;
+}
+
+.chatBox form > * {
+  margin-bottom: 10px;
+}
+
+.chatBox .row + .row {
+  margin-top: 30px;
+}
+
+.chatBox .form-control {
+  background-color: #ffffff;
+}
+
+.chatBox button {
+  background-color: #3498db;
+  color: #ffffff;
+}
+
+.chatBox button:hover {
+  background-color: #2980b9;
+}
+
+.chatBox .form-control:focus {
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+}
+.chatBox .header {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.chatBox .submitRow {
+  display: flex;
+  justify-content: center;
+}
